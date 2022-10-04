@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('exercise_videos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exercise_id');
-            $table->foreign('exercise_id')->references('id')->on('exercises');
+            $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
             $table->string('video')->nullable();
             $table->timestamps();
         });

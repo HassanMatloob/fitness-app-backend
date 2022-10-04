@@ -11,6 +11,16 @@ class Exercises extends Model
 
     protected $table = 'exercises';
 
+    public function videos()
+    {
+        return $this->hasMany(ExerciseVideos::class,'exercise_id');
+    }
+
+    public function categorie()
+    {
+        return $this->belongsToMany(Categories::class);
+    }
+
     protected $fillable = [
         'name',
         'image',

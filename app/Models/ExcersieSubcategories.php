@@ -9,10 +9,10 @@ class ExcersieSubcategories extends Model
 {
     use HasFactory;
 
-    protected $table = 'exercise_subcategories';
+    protected $table = 'categories_exercises';
 
     protected $fillable = [
-        'category_id',
-        'exercise_id',
+        'categories_id',
+        'exercises_id',
     ];
 }

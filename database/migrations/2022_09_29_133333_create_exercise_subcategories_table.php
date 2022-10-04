@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('exercise_subcategories', function (Blueprint $table) {
+        Schema::create('categories_exercises', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('exercise_id');
-            $table->foreign('exercise_id')->references('id')->on('exercises');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('exercises_id');
+            $table->foreign('exercises_id')->references('id')->on('exercises')->onDelete('cascade');
+            $table->unsignedBigInteger('categories_id');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

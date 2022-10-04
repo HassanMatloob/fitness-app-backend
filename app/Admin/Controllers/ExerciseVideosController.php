@@ -28,7 +28,17 @@ class ExerciseVideosController extends AdminController
         $grid = new Grid(new ExerciseVideos());
 
         $grid->column('id', __('Id'));
-        $grid->column('exercise_id', __('Exercise id'));
+        $grid->column('exercise_id', __('Exercise Name'))->display(function ($id ,$column) {
+            if($id != 0){
+                $cat = Exercises::find($id);
+                return $cat->name;
+            }else{
+                return "Not Found Contact Admin";
+
+            }
+            
+            
+        });
         $grid->column('video', __('Video'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -47,7 +57,16 @@ class ExerciseVideosController extends AdminController
         $show = new Show(ExerciseVideos::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('exercise_id', __('Exercise id'));
+        $show->field('exercise_id', __('Exercise Name'))->as(function ($id) {
+            if($id != 0){
+                $cat = Exercises::find($id);
+                return $cat->name;
+            }else{
+                return "Not Found";
+
+            }
+            
+        });
         $show->field('video', __('Video'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));

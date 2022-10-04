@@ -21,6 +21,7 @@ use Encore\Admin\Form;
  */
 
 Form::forget(['map', 'editor']);
+\Encore\Admin\Form::extend('base64Image', Base64Image::class);
 
 Form::init(function(Form $form){
     
