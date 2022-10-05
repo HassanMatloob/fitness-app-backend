@@ -11,6 +11,11 @@ class ExerciseVideos extends Model
 
     protected $table = 'exercise_videos';
 
+    public function exercise()
+    {
+        return $this->belongsTo(Exercises::class,'id');
+    }
+
     protected $fillable = [
         'video',
     ];

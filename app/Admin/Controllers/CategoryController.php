@@ -28,8 +28,19 @@ class CategoryController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-        $grid->column('image', __('Image'));
-        $grid->column('parent_id', __('Parent id'));
+        $grid->column('image', __('Image'))->image();
+        $grid->column('parent_id', __('Parent Categorie'))->display(function ($id ,$column) {
+            if($id != 0){
+                $cat = Categories::find($id);
+                return $cat->name;
+            }else{
+                return "No Parent";
+
+            }
+            
+            
+        });
+        
         $grid->column('status', __('Status'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -50,7 +61,17 @@ class CategoryController extends AdminController
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
         $show->field('image', __('Image'));
-        $show->field('parent_id', __('Parent id'));
+        $show->field('parent_id', __('Parent Categorie'));
+        $show->parent_id()->as(function ($id) {
+            if($id != 0){
+                $cat = Categories::find($id);
+                return $cat->name;
+            }else{
+                return "No Parent";
+
+            }
+            
+        });
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -80,9 +101,8 @@ class CategoryController extends AdminController
         $form = new Form(new Categories());
 
         $form->text('name', __('Name'));
-        $form->textarea('image', __('Image'));
-        //$form->text('parent_id', __('Parent id'));
-        $form->select('parent_id')->options($option);
+        $form->image('image', __('Image'));
+        $form->select('parent_id' ,__('Parent Categorie'))->options($option);
         //$form->text('status', __('Status'));
 
         return $form;
